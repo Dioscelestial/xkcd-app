@@ -2,10 +2,10 @@ import * as React from "react";
 import { NextUIProvider } from "@nextui-org/react";
 import { Header } from "../components/Header";
 
-function MyApp({ Component }) {
+function MyApp({ Component, pageProps  }) {
   return (
     <NextUIProvider>
-      <Component />
+      <Component {...pageProps} />
     </NextUIProvider>
   );
 }
