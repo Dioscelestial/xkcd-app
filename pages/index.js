@@ -1,4 +1,3 @@
-// import Comics from "./comics";
 import Head from "next/head";
 import {
   Container,
@@ -12,10 +11,11 @@ import {
 } from "@nextui-org/react";
 import { Header } from "../components/Header";
 import { readdir, readFile } from "fs/promises";
+import { imageConfigDefault } from "next/dist/shared/lib/image-config";
 
 export default function Home({ lastestComics }) {
   return (
-    <div>
+    <>
       <Head>
         <title>xkcd - App</title>
         <meta name="description" content="xkcd - Comics" />
@@ -54,8 +54,8 @@ export default function Home({ lastestComics }) {
                           </Text>
                         </Row>
                         <Image
-                          width={550}
-                          height={400}
+                          width={comic.width}
+                          height={comic.height}
                           layout="intrinsic"
                           objectFit="contain"
                           src={comic.img}
@@ -70,7 +70,7 @@ export default function Home({ lastestComics }) {
           </Card>
         </Container>
       </main>
-    </div>
+    </>
   );
 }
 export async function getStaticProps() {
