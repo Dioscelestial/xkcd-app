@@ -9,9 +9,8 @@ import {
   Spacer,
   Grid,
 } from "@nextui-org/react";
-import { Header } from "../components/Header";
 import { readdir, readFile } from "fs/promises";
-import { imageConfigDefault } from "next/dist/shared/lib/image-config";
+import { Layout } from "components/Layout";
 
 export default function Home({ lastestComics }) {
   return (
@@ -19,57 +18,50 @@ export default function Home({ lastestComics }) {
       <Head>
         <title>xkcd - App</title>
         <meta name="description" content="xkcd - Comics" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
+      <Layout>
+        <Text
+          h2
+          css={{
+            m: "$sm",
+            padding: "$2",
+            textAlign: "center",
+            textGradient: "45deg, #000000 -20%, #6F6F6F 80%",
+          }}
+          weight="bold"
+        >
+          Lastest Comics
+        </Text>
 
-      <main>
-        <Container xl gap={0}>
-          <Spacer y={1} />
-          <Card>
-            <Card.Body>
-              <Row justify="center" align="center">
-                <Text
-                  h2
-                  css={{
-                    textGradient: "45deg, #000000 -20%, #6F6F6F 80%",
-                  }}
-                  weight="bold"
-                >
-                  Lastest Comics
-                </Text>
-              </Row>
-            </Card.Body>
-
-            <Grid.Container justify="center">
-              {lastestComics.map((comic) => {
-                return (
-                  <Link key={comic.id} href={`/comic/${comic.id}`}>
-                    <a>
-                      <Grid xs md lg xl>
-                        <Row justify="center" align="center">
-                          <Text h3 weight="bold">
-                            {comic.title}
-                          </Text>
-                        </Row>
-                        <Image
-                          width={comic.width}
-                          height={comic.height}
-                          layout="intrinsic"
-                          objectFit="contain"
-                          src={comic.img}
-                          alt={comic.alt}
-                        />
-                      </Grid>
-                    </a>
-                  </Link>
-                );
-              })}
-            </Grid.Container>
-          </Card>
-        </Container>
-      </main>
+        <Grid.Container justify="center" gap={3}>
+          {lastestComics.map((comic) => {
+            return (
+              <Link key={comic.id} href={`/comic/${comic.id}`}>
+                <Card isHoverable isPressable variant="bordered" css={{ m: "$sm", padding: "$2" }}>
+                  <a>
+                    <Grid xs md lg xl>
+                      <Row justify="center">
+                        <Text h3 weight="bold">
+                          {comic.title}
+                        </Text>
+                      </Row>
+                      <Image
+                        width={comic.width}
+                        height={comic.height}
+                        layout="intrinsic"
+                        objectFit="contain"
+                        src={comic.img}
+                        alt={comic.alt}
+                      />
+                    </Grid>
+                  </a>
+                </Card>
+              </Link>
+            );
+          })}
+        </Grid.Container>
+      </Layout>
     </>
   );
 }

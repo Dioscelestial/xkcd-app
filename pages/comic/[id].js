@@ -9,12 +9,15 @@ import {
   Button,
 } from "@nextui-org/react";
 import Head from "next/head";
-import { Header } from "components/Header";
+
 import { readdir, readFile, stat } from "fs/promises";
 import Link from "next/link";
 import { basename } from "path";
 
+import { Layout } from "components/Layout";
+
 export default function ComicSelect({
+  id,
   img,
   alt,
   title,
@@ -28,13 +31,11 @@ export default function ComicSelect({
   return (
     <>
       <Head>
-        <title>xkcd - App</title>
+        <title>xkcd - Comic {id}</title>
         <meta name="description" content="xkcd - Comics" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
-      <main>
+      <Layout>
         <Container>
           <Spacer y={1} />
           <Card>
@@ -84,7 +85,7 @@ export default function ComicSelect({
             <Spacer y={1} />
           </Card>
         </Container>
-      </main>
+      </Layout>
     </>
   );
 }

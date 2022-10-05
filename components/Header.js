@@ -20,7 +20,8 @@ export function Header() {
         <Navbar.Link href="/">Home</Navbar.Link>
         {/* <Navbar.Link href="/Features">Features</Navbar.Link>
         <Navbar.Link href="/About">About</Navbar.Link>
-        <Navbar.Link href="/Search">Search</Navbar.Link> */}
+         */}
+        <Navbar.Link href="/search?">Search</Navbar.Link>
       </Navbar.Content>
     </Navbar>
   );
