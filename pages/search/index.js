@@ -1,4 +1,4 @@
-import { Card, Container, Row, Text } from "@nextui-org/react";
+import { Card, Container, Loading, Row, Text } from "@nextui-org/react";
 import Head from "next/head";
 import { search } from "services/search.js";
 import { Layout } from "components/Layout";
