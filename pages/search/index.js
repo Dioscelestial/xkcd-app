@@ -1,4 +1,4 @@
-import { Card, Container, Loading, Row, Text } from "@nextui-org/react";
+import { Card, Container, Row, Text } from "@nextui-org/react";
 import Head from "next/head";
 import { search } from "services/search.js";
 import { Layout } from "components/Layout";
@@ -47,7 +47,7 @@ export default function Component({ query, result }) {
                         <Image
                           width="150"
                           height="150"
-                          layout="fixed" //fill,fixed,intrinsic,responsive,undefined.
+                          layout="fixed"
                           src={result.img}
                           alt={result.alt}
                         />

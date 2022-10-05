@@ -34,6 +34,11 @@ export function Header() {
             <Input
               type="search"
               ref={searchRef}
+              contentRight={
+                <Dropdown.Button light rounded>
+                  <SearchIcon fill="var(--nextui-colors-accents6)" size={16} />
+                </Dropdown.Button>
+              }
               css={{
                 w: "100%",
                 "@xsMax": { mw: "300px" },
@@ -45,15 +50,17 @@ export function Header() {
               }}
               placeholder="Search..."
               onChange={handleChange}
-              contentRight={
-                <Dropdown.Button>
-                  <SearchIcon />
-                </Dropdown.Button>
-              }
             />
 
             <Dropdown.Menu aria-label="Dynamic Action" color="secondary">
               {Boolean(result.length) &&
+                // <Dropdown.Item key={result.id}>
+                //       <Link href={`/search/${result.id}`}>
+                //         <a>
+                //           <Text b>{result.title}</Text>
+                //         </a>
+                //       </Link>
+                // </Dropdown.Item>
                 result.map((result) => {
                   return (
                     <Dropdown.Item key={result.id}>
