@@ -1,0 +1,9 @@
+{
+    "LATEST_COMICS": "Lastest Comics",
+    "SEO_DEFAULT_TITLE": "xkcd - Comics for developers",
+    "SEARCH_RESULT_TITLE": "${0} results for ${1}",
+    "SEARCH_RESULT": "See ${0} results",
+    "PREVIOUS_COMIC": "⬅️Previous",
+    "NEXT_COMIC": "Next➡️",
+    "FOOTER_PAGE": "All rights reserved by its creator at ©️xkcd.com"
+}

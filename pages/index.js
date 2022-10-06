@@ -1,22 +1,15 @@
 import Head from "next/head";
-import {
-  Container,
-  Card,
-  Row,
-  Text,
-  Link,
-  Image,
-  Spacer,
-  Grid,
-} from "@nextui-org/react";
+import { Card, Row, Text, Link, Image, Grid } from "@nextui-org/react";
 import { readdir, readFile } from "fs/promises";
 import { Layout } from "components/Layout";
+import { useI18N } from "context/i18n";
 
 export default function Home({ lastestComics }) {
+  const { t } = useI18N();
   return (
     <>
       <Head>
-        <title>xkcd - App</title>
+        <title>{t("SEO_DEFAULT_TITLE")}</title>
         <meta name="description" content="xkcd - Comics" />
       </Head>
 
@@ -31,14 +24,19 @@ export default function Home({ lastestComics }) {
           }}
           weight="bold"
         >
-          Lastest Comics
+          {t("LATEST_COMICS")}
         </Text>
 
         <Grid.Container justify="center" gap={3}>
           {lastestComics.map((comic) => {
             return (
               <Link key={comic.id} href={`/comic/${comic.id}`}>
-                <Card isHoverable isPressable variant="bordered" css={{ m: "$sm", padding: "$2" }}>
+                <Card
+                  isHoverable
+                  isPressable
+                  variant="bordered"
+                  css={{ m: "$sm", padding: "$2" }}
+                >
                   <a>
                     <Grid xs md lg xl>
                       <Row justify="center">

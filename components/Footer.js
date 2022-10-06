@@ -1,7 +1,9 @@
 import { Card, Container, Row, Spacer, Text } from "@nextui-org/react";
+import { useI18N } from "context/i18n";
 import Link from "next/link";
 
 export function Footer() {
+  const {t} = useI18N()
   return (
     <footer>
       <Spacer></Spacer>
@@ -21,7 +23,7 @@ export function Footer() {
                   target="_blank"
                   rel="noop noreferrer"
                 >
-                  Todos los derechos reservador por su creador en ©️xkcd.com
+                  {t("FOOTER_PAGE")}
                 </Link>
               </Text>
             </Row>

@@ -4,8 +4,10 @@ import { search } from "services/search.js";
 import { Layout } from "components/Layout";
 import Link from "next/link";
 import Image from "next/image";
+import { useI18N } from "context/i18n";
 
 export default function Component({ query, results }) {
+  const { t } = useI18N();
   return (
     <>
       <Head>
@@ -24,7 +26,7 @@ export default function Component({ query, results }) {
           }}
           weight="bold"
         >
-          Resultados para: {query}
+          {t("SEARCH_RESULT_TITLE", results.length, query)}
         </Text>
         <Container
           display="flex"

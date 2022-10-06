@@ -1,13 +1,5 @@
 import Image from "next/image";
-import {
-  Text,
-  Grid,
-  Row,
-  Container,
-  Spacer,
-  Card,
-  Button,
-} from "@nextui-org/react";
+import { Text, Grid, Row, Container, Spacer, Card } from "@nextui-org/react";
 import Head from "next/head";
 
 import { readdir, readFile, stat } from "fs/promises";
@@ -15,6 +7,7 @@ import Link from "next/link";
 import { basename } from "path";
 
 import { Layout } from "components/Layout";
+import { useI18N } from "context/i18n";
 
 export default function ComicSelect({
   id,
@@ -28,6 +21,7 @@ export default function ComicSelect({
   prevId,
   nextId,
 }) {
+  const { t } = useI18N();
   return (
     <>
       <Head>
@@ -66,7 +60,8 @@ export default function ComicSelect({
                 <Text b>
                   <Link href={`/comic/${prevId}`}>
                     {/* <Button shadow color="primary"> */}
-                    ⬅️Previous
+                    {t("PREVIOUS_COMIC")}
+
                     {/* </Button> */}
                   </Link>
                 </Text>
@@ -76,7 +71,7 @@ export default function ComicSelect({
                 <Text b>
                   <Link href={`/comic/${nextId}`}>
                     {/* <Button shadow color="warning"> */}
-                    Next➡️
+                    {t("NEXT_COMIC")}
                     {/* </Button> */}
                   </Link>
                 </Text>
@@ -89,11 +84,19 @@ export default function ComicSelect({
     </>
   );
 }
-export async function getStaticPaths() {
+export async function getStaticPaths({ locales }) {
   const files = await readdir("./comics");
-  const paths = files.map((file) => {
-    const id = basename(file, ".json");
-    return { params: { id } };
+  let paths = [];
+
+  // locales => ['es', 'en']
+
+  locales.forEach((locale) => {
+    paths = paths.concat(
+      files.map((file) => {
+        const id = basename(file, ".json");
+        return { params: { id }, locale };
+      })
+    );
   });
 
   return {
