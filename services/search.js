@@ -11,9 +11,7 @@ const CACHE = {};
 export const search = async ({ query }) => {
   if (CACHE[query]) {
     console.log("from cache", query);
-    return { results: CACHE[query] };
   }
-  console.log("searching for", query);
   const { hits } = await index.search(query, {
     attributesToRetrieve: ["id", "title", "alt", "img"],
     hitsPerPage: 10,
