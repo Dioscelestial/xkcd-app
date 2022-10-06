@@ -7,8 +7,11 @@ export function Header() {
   const [result, setResult] = useState([]);
   const searchRef = useRef();
 
+  const getValue = () => searchRef.current?.value;
+
   const handleChange = () => {
-    const q = searchRef.current.value;
+    const q = getValue();
+    if (!q) return;
     fetch(`/api/search?q=${q}`)
       .then((res) => res.json())
       .then((searchResults) => {
@@ -32,6 +35,7 @@ export function Header() {
         <Navbar.Item css={{ "@xsMax": { w: "100%", jc: "center" } }}>
           <Dropdown>
             <Input
+              clearable
               type="search"
               ref={searchRef}
               contentRight={
@@ -51,16 +55,8 @@ export function Header() {
               placeholder="Search..."
               onChange={handleChange}
             />
-
-            <Dropdown.Menu aria-label="Dynamic Action" color="secondary">
+            <Dropdown.Menu aria-label="Dynamic Action" color="primary">
               {Boolean(result.length) &&
-                // <Dropdown.Item key={result.id}>
-                //       <Link href={`/search/${result.id}`}>
-                //         <a>
-                //           <Text b>{result.title}</Text>
-                //         </a>
-                //       </Link>
-                // </Dropdown.Item>
                 result.map((result) => {
                   return (
                     <Dropdown.Item key={result.id}>
@@ -72,6 +68,13 @@ export function Header() {
                     </Dropdown.Item>
                   );
                 })}
+              <Dropdown.Item key="all-results">
+                <Link href={`/search?q=${getValue()}`}>
+                  <a>
+                    <Text weight>Mostrar los {result.length} Resultados</Text>
+                  </a>
+                </Link>
+              </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Navbar.Item>

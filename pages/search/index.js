@@ -5,7 +5,7 @@ import { Layout } from "components/Layout";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function Component({ query, result }) {
+export default function Component({ query, results }) {
   return (
     <>
       <Head>
@@ -32,7 +32,7 @@ export default function Component({ query, result }) {
           justify="center"
           alignItems="center"
         >
-          {result.map((result) => {
+          {results.map((result) => {
             return (
               <Link href={`/comic/${result.id}`} key={result.id}>
                 <Card
@@ -71,12 +71,12 @@ export async function getServerSideProps(context) {
   const { query } = context;
   const { q = "" } = query;
 
-  const { result } = await search(q, { query: q });
+  const { results } = await search({ query: q });
 
   return {
     props: {
       query: q,
-      result,
+      results,
     },
   };
 }
