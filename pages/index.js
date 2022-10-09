@@ -1,8 +1,10 @@
 import Head from "next/head";
-import { Card, Row, Text, Link, Image, Grid } from "@nextui-org/react";
+import { Card, Row, Text, Link, Image, Container } from "@nextui-org/react";
 import { readdir, readFile } from "fs/promises";
 import { Layout } from "components/Layout";
 import { useI18N } from "context/i18n";
+import * as React from "react";
+import Masonry from "@mui/lab/Masonry";
 
 export default function Home({ lastestComics }) {
   const { t } = useI18N();
@@ -26,39 +28,43 @@ export default function Home({ lastestComics }) {
         >
           {t("LATEST_COMICS")}
         </Text>
-
-        <Grid.Container justify="center" gap={3}>
+        <Masonry columns={{ xs: 2, sm: 4, md: 5, lg: 6, xl: 7 }}>
+          {/* <Grid.Container justify="center" css={{maxW: "100%"}}> */}
           {lastestComics.map((comic) => {
             return (
               <Link key={comic.id} href={`/comic/${comic.id}`}>
                 <Card
                   isHoverable
                   isPressable
-                  variant="bordered"
-                  css={{ m: "$sm", padding: "$2" }}
+                  css={{
+                    height: "comic.height",
+                    width: "comic.width",
+                    m: "xs",
+                    padding: "$1",
+                  }}
                 >
                   <a>
-                    <Grid xs md lg xl>
+                    <Container>
                       <Row justify="center">
                         <Text h3 weight="bold">
                           {comic.title}
                         </Text>
                       </Row>
-                      <Image
-                        width={comic.width}
-                        height={comic.height}
-                        layout="intrinsic"
-                        objectFit="contain"
+                      <Card.Image
+                        width="100%"
+                        height="100%"
+                        objectFit="cover"
                         src={comic.img}
                         alt={comic.alt}
                       />
-                    </Grid>
+                    </Container>
                   </a>
                 </Card>
               </Link>
             );
           })}
-        </Grid.Container>
+        </Masonry>
+        {/* </Grid.Container> */}
       </Layout>
     </>
   );

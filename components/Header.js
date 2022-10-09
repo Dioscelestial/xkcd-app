@@ -27,29 +27,34 @@ export function Header() {
   const restOflocales = locales.filter((l) => l !== locale);
 
   return (
-    <Navbar aria-label="Nav Bar" display="flex" justify="space-between">
+    <Navbar
+      css={{
+        maxW: "100%",
+      }}
+      shouldHideOnScroll
+    >
       <Navbar.Brand>
-        <Text b color="inherit" hideIn="xs">
+        <Text b hideIn="xs">
           Next
         </Text>
         <Text>xkcd</Text>
       </Navbar.Brand>
 
-      <Navbar.Content hideIn="xs">
+      <Navbar.Content enableCursorHighlight hideIn="xs">
         <Navbar.Link href="/">Home</Navbar.Link>
         <Navbar.Link href={`/${restOflocales[0]}`}>
           {restOflocales[0]}
         </Navbar.Link>
       </Navbar.Content>
-
-      <Navbar.Content css={{ "@xsMax": { w: "100%", jc: "space-between" } }}>
-        <Navbar.Item css={{ "@xsMax": { w: "100%", jc: "center" } }}>
+      
+      <Navbar.Content >
+        <Navbar.Item >
           <Dropdown aria-label="Dynamic Action">
             <Input
               clearable
               type="search"
               ref={searchRef}
-              contentRight={
+              contentLeft={
                 <Dropdown.Button light rounded>
                   <SearchIcon fill="var(--nextui-colors-accents6)" size={16} />
                 </Dropdown.Button>
