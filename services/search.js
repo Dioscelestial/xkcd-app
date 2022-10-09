@@ -14,7 +14,7 @@ export const search = async ({ query }) => {
   }
   const { hits } = await index.search(query, {
     attributesToRetrieve: ["id", "title", "alt", "img"],
-    hitsPerPage: 10,
+    hitsPerPage: 20,
   });
 
   CACHE[query] = hits;
